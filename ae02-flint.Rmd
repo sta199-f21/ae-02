@@ -1,32 +1,35 @@
 ---
-title: "Flint Water Crisis"
-author: "Your Name"
-date: "8/25/2021"
+title: "Application Exercise 02"
+date: "TODAY'S DATE"
+author: "YOUR NAME"
 output: 
-  html_document 
+  html_document: 
+    fig_height: 4
+    fig_width: 9
 ---
+
+## Concepts introduced
+
+- Knitting documents
+- R Markdown and (some) R syntax
 
 ## Introduction
 
-The data set consists of 271 homes sampled with three water lead contaminant values at designated time points. The lead content is in parts per billion (ppb). Additionally, some location data is given about each home.
+The data set consists homes sampled with three water lead contaminant values at designated time points. The lead content is in parts per billion (ppb). Additionally, some location data is given about each home.
 
-## Packages
+To get started, read in the `flint.csv` file using the function `read_csv`.
 
 ```{r load-packages, warning = FALSE, message=FALSE}
 library(tidyverse)
 ```
 
-## Data
-
-To get started, read in the `flint.csv` file using the function `read_csv`. First, use the Upload button under Files.
-
 ```{r flint, warning = FALSE, message = FALSE}
-flint <- read_csv("~/flint.csv")
+flint <- read_csv("data/flint.csv")
 ```
 
 In this file, there are five variables:
 
-- **id**: sample ID number
+- **id**: sample ID number (identifies the home)
 - **zip**: ZIP code in Flint of the sample's location
 - **ward**: ward in Flint of the sample's location
 - **draw**: which time point the water was sampled from
@@ -38,16 +41,26 @@ Let's preview the data with the `glimpse()` function:
 glimpse(flint)
 ```
 
+There are ______ time points the water was sampled in the data set.
+
+The total number of water samples is ______ .
+
 ## Analysis
 
 ### Part 1
 
-Let’s see how many samples were taken from each zip code.
+Let's see how many homes are in the data set. 
+
+```{r count-homes}
+flint %>%
+  count(id)
+```
+
+Fill in the code to see how many samples were taken from each zip code. Uncomment the lines (i.e. remove the `#` before running the code)
 
 ```{r count-by-zip, echo = TRUE}
-flint %>%               # data
-  group_by(zip) %>%     # perform a grouping by zip code
-  count()               # count occurrences
+# flint %>% 
+ # count(______)
 ```
 
 Which ZIP code had the most samples drawn?
@@ -115,9 +128,12 @@ ggplot(data = flint_focus, aes(x = factor(zip), y = lead)) +
   theme_bw()
 ```
 
-What is the difference between the two plots?
+What is the difference between the two plots? What are the advantages and disadvantages to each plot? 
+
+## Submitting application exercises 
+
+**No need to submit this application exercise. Typically you will push your final changes to a GitHub repo, and that's all you need to do to submit application exercises for participation.**
 
 ## References
 
 1. Langkjaer-Bain, R. (2017). The murky tale of Flint’s deceptive water data. Significance, 14: 16-21.
-2. Holtz, Y. (2018). Pimp my RMD: a few tips for R Markdown. Accessed at [https://holtzy.github.io/Pimp-my-rmd/](https://holtzy.github.io/Pimp-my-rmd/)
